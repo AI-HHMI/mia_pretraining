@@ -1,71 +1,254 @@
 name: Add a dataset or a crop to the data collection
-description: Ask for a volume (or a crop of one) to be ingested into the data collection
-title: "<Project> - <dataset name>"
+description: Ask for a volume (or a crop of one), and the labels that come with it, to be ingested into the data collection
+title: <Project> - <dataset name>
 body:
-  - type: markdown
-    attributes:
-      value: |
-        **How this form works**
-        1. Fill the fields below. The ones marked required must be filled before you can submit. The grey text in a box shows the exact format to use.
-        2. Submit. The automation reads your answers as written, so please keep the formats (for example `Z[start:end], Y[start:end], X[start:end]`).
-        3. Then I read the volume, post what I found and the proposed crop on the issue, and the ingestion starts after the approver says yes.
-        Questions about a field: ask in the comments or tag @dchen116.
-
-  - type: input
-    id: source
-    attributes:
-      label: Source (cluster path to the volume)
-      placeholder: "/groups/tavakoli/tavakolilab/<folder>/fused.ome.zarr"
-    validations:
-      required: true
-  - type: dropdown
-    id: modality
-    attributes:
-      label: Modality
-      options:
-        - Expansion microscopy (ExM)
-        - Light microscopy (LM)
-        - Electron microscopy (EM)
-        - Micro-CT
-        - Other (say which in the notes)
-    validations:
-      required: true
-  - type: dropdown
-    id: organism
-    attributes:
-      label: Organism
-      options:
-        - Drosophila
-        - Mouse
-        - Zebrafish
-        - Human
-        - Other (say which in the notes)
-    validations:
-      required: true
-  - type: input
-    id: expansion
-    attributes:
-      label: Expansion factor
-      placeholder: "none, or for example 16x"
-    validations:
-      required: true
-  - type: textarea
-    id: bbox
-    attributes:
-      label: Crop (box to ingest)
-      description: A Neuroglancer link to the box, or `Z[a:b], Y[a:b], X[a:b]` and the grid they are in. Write "the whole volume" if it is small.
-    validations:
-      required: true
-  - type: input
-    id: replaces
-    attributes:
-      label: Replaces (issue number, only when this volume takes the place of an earlier dataset)
-      placeholder: "#456"
-  - type: textarea
-    id: publication
-    attributes:
-      label: License and publication (optional)
-  - type: textarea
-    id: notes
-    attributes:
-      label: Notes (optional)
+- type: markdown
+  attributes:
+    value: |
+      **How this form works**
+      1. Go through the steps below in order (Step 1, Step 2, ...). A step marked (optional) can be left empty; the others must be filled before you can submit. The grey text in a box shows the exact format to use.
+      2. Submit. The findings comment that follows is written from your answers, so please keep the formats.
+      3. Then the volume and the box are checked, a findings comment states what will be ingested, and after the approver says yes the data is written into the data collection.
+      Questions about a field: ask in the comments or tag @dchen116.
+- type: dropdown
+  id: kind
+  attributes:
+    label: Step 1. What is new
+    options:
+    - A new dataset (no earlier folder for this volume)
+    - A new crop of a dataset that is already in the data collection
+    - A volume that replaces an earlier dataset
+  validations:
+    required: true
+- type: input
+  id: related
+  attributes:
+    label: Step 2. The dataset issue it belongs to or replaces (optional)
+    description: Needed for a new crop of an existing dataset, and for a replacement. Issue number or link.
+    placeholder: '#456, or mia_pretraining#479'
+- type: dropdown
+  id: family
+  attributes:
+    label: Step 3. Project (board field Dataset)
+    options:
+    - MammalianLICONN
+    - FlyLICONN
+    - Betzig Fish
+    - CellMap
+    - MICrONS
+    - Other (say which in the notes)
+  validations:
+    required: true
+- type: dropdown
+  id: organism
+  attributes:
+    label: Step 4. Organism (board field Organism)
+    options:
+    - Zebrafish
+    - Mouse
+    - Drosophila
+    - C. elegans
+    - Human
+    - Danionella
+    - Hydra vulgaris
+    - Rat
+    - Zebrafinch
+    - Macaque
+    - African Green Monkey
+    - Salamander
+    - Aedes aegypti (Mosquito)
+    - Various
+    - Other (say which in the notes)
+  validations:
+    required: true
+- type: dropdown
+  id: modality
+  attributes:
+    label: Step 5. Modality (how the data was imaged; board field Data_Modality)
+    options:
+    - FIB-SEM
+    - ssTEM
+    - ssTEM (Multibeam SEM)
+    - ssTEM (GridTape-TEM)
+    - ATUM-mSEM
+    - ssSEM
+    - ssSEM (ATUM)
+    - ssSEM (Multibeam SEM)
+    - Serial block-face SEM (SBF-SEM)
+    - Expansion Microscopy (Spinning Disk)
+    - Expansion Microscopy (Mirror)
+    - Expansion Microscopy (Confocal)
+    - Expansion Microscopy (Light Sheet)
+    - Light-sheet (LLSM)
+    - Confocal (CLSM)
+    - Multiview SIM
+    - Micro-CT (X-ray microscopy)
+    - Electron Tomography (TEM)
+    - Synthetic
+    - Other (say which in the notes)
+  validations:
+    required: true
+- type: input
+  id: dataset
+  attributes:
+    label: Step 6. Dataset name and sample
+    description: What it is, in one line, as it should read on the issue and the board.
+    placeholder: Mouse LICONN - RID16 (Retina, spinning disk), 18x
+  validations:
+    required: true
+- type: dropdown
+  id: source_type
+  attributes:
+    label: Step 7. Source type (board field Source_Type)
+    options:
+    - Internal (Janelia/HHMI)
+    - External (Public)
+    - External (Collaboration)
+  validations:
+    required: true
+- type: input
+  id: source_lab
+  attributes:
+    label: Step 8. Source lab or provider (board field Source_Lab)
+    placeholder: Tavakoli lab (Janelia), or CellMap
+  validations:
+    required: true
+- type: input
+  id: source
+  attributes:
+    label: Step 9. Source path (cluster path to the volume, or the file)
+    placeholder: /groups/tavakoli/tavakolilab/Morgan/For Tracing/large stacks_RID16a/fused-tps.ome.zarr
+  validations:
+    required: true
+- type: input
+  id: format
+  attributes:
+    label: Step 10. Format and size of the source (optional)
+    description: File or array format, data type, and how big it is.
+    placeholder: OME-Zarr, uint16, about 400 GB
+- type: input
+  id: voxel
+  attributes:
+    label: Step 11. Voxel size in nm (z, y, x) (optional)
+    description: Only when the file does not say it, or you know it is wrong in the file.
+    placeholder: 400, 162.5, 162.5
+- type: input
+  id: expansion
+  attributes:
+    label: Step 12. Expansion factor
+    description: '`none` for an unexpanded sample. For expansion microscopy, say who measured or confirmed it.'
+    placeholder: 16x (confirmed by Moe Tavakoli), or none
+  validations:
+    required: true
+- type: textarea
+  id: crop
+  attributes:
+    label: Step 13. Crop (the box to ingest)
+    description: A Neuroglancer link to the box, or `Z[start:end], Y[start:end], X[start:end]` in voxels with the grid they are in. Write "the whole volume" if it is small. Large volumes (above about 500 GB of raw data) need a box.
+    placeholder: Z[250:4200], Y[3500:5300], X[2300:7550], voxels of the raw image
+  validations:
+    required: true
+- type: input
+  id: cropname
+  attributes:
+    label: Step 14. Crop name (optional)
+    description: '`crop-001` for the first crop of a dataset; add a short word after it only when it means something (`crop-002_nuc`).'
+    placeholder: crop-001
+- type: textarea
+  id: labels
+  attributes:
+    label: Step 15. Label paths (optional, one per line)
+    description: Where each label is (cluster path or Fileglancer link), and its name in its container. Leave Steps 15 to 22 empty when no labels come with the volume.
+    placeholder: /groups/miaai/miaai/Annotation_JJ/mito001/mito001.zarr/mito001_combined_AIPv2
+- type: dropdown
+  id: label_class
+  attributes:
+    label: Step 16. What the labels segment (optional)
+    options:
+    - cell
+    - neuron
+    - neurite
+    - nucleus
+    - mitochondria
+    - synapse
+    - vesicle
+    - myelin
+    - blood_vessel
+    - spine
+    - active_zone
+    - Several organelle classes in one label (CellMap style, list them in Step 20)
+    - Other (say which in the notes)
+- type: dropdown
+  id: segmentation_type
+  attributes:
+    label: Step 17. Segmentation type (optional)
+    description: Instance means every object has its own id. Semantic means each voxel holds a class. Point means point annotations.
+    options:
+    - instance (every object its own id)
+    - semantic (each value is a class)
+    - point
+- type: dropdown
+  id: provenance
+  attributes:
+    label: Step 18. Where the labels come from (optional)
+    options:
+    - Manual annotation (ground truth)
+    - Automatic prediction (not proofread)
+    - Proofread prediction
+    - Public ground truth from a published dataset
+- type: dropdown
+  id: coverage
+  attributes:
+    label: Step 19. How much of the crop the labels cover (optional)
+    options:
+    - Dense (every object in the crop is labelled)
+    - Sparse (only a selected part is labelled)
+    - The whole volume
+    - Points only
+- type: textarea
+  id: classes
+  attributes:
+    label: Step 20. Class table for semantic labels (optional)
+    description: One line per value, `value = class name`. Leave empty for an instance label.
+    placeholder: |-
+      50 = mitochondria
+      78 = mito_daughter_sdm
+- type: input
+  id: made_by
+  attributes:
+    label: Step 21. Who made the labels, with what, and when (optional)
+    description: Annotators' full names, the tool, and the date of the final version.
+    placeholder: Alannah Post and Marley Bryant, Amira, 2026-08-24
+- type: textarea
+  id: label_notes
+  attributes:
+    label: Step 22. Anything else about the labels (optional)
+    description: Known problems, merged or split ids, which version is the final one, model name for a prediction.
+- type: dropdown
+  id: license
+  attributes:
+    label: Step 23. License
+    options:
+    - CC BY 4.0, Janelia data (see the open science page)
+    - Another public license (give it in Step 24)
+    - Not stated at the source
+  validations:
+    required: true
+- type: textarea
+  id: publication
+  attributes:
+    label: Step 24. Publication and license details (optional)
+    description: The DOI or paper, and the license text or link when it is not CC BY 4.0.
+    placeholder: Zheng et al. 2025, doi:10.1101/2025.07.09.663979. MIT, from the HuggingFace card.
+- type: input
+  id: people
+  attributes:
+    label: Step 25. Hand to and who asked (GitHub users)
+    placeholder: '@CarlaRodriguez96 @walshjj'
+  validations:
+    required: true
+- type: textarea
+  id: notes
+  attributes:
+    label: Step 26. Notes (optional)
+    description: Anything about the data (how it was made, tiling artifacts, why it replaces an earlier one).
