@@ -30,10 +30,10 @@ What each step asks for:
 | 1 to 2 | what is new (a new dataset, a new crop of an existing one, or a volume that replaces an earlier dataset) and the dataset issue it belongs to or replaces |
 | 3 to 8 | the dataset: project, organism, modality, name, source type (internal or external) and source lab. They match the board fields of the same names |
 | 9 to 12 | the source: cluster path, format and size, voxel size (only if the file does not say it), expansion factor and who confirmed it |
-| 13 to 20 | the crop (all optional): a Neuroglancer link to the box; **Crop box 1** to **Crop box 5** and **More crop boxes** (one per line), each as start to end `Z[250:4200], Y[3500:5300], X[2300:7550]` or as start and size `Z=250, Y=3500, X=2300, size 3950x1800x5250`; the crop name. See "The crop box" below |
-| 21 to 28 | the labels that come with the data (leave empty when there are none): where they are, what they segment (cell, neuron, nucleus, mitochondria, ...), instance or semantic, where they come from (manual, automatic prediction, proofread, public), how much they cover, the class table of a semantic label, who made them and when |
-| 29 to 30 | license (CC BY 4.0 for Janelia data, another public license, or not stated at the source) and publication |
-| 31 to 32 | who to hand it to, and notes |
+| 13 to 17 | the crop (all optional): a Neuroglancer link to the box; **Crop box 1**, **Crop box 2** and **More crop boxes** (box 3 and up, one per line), each as start to end `Z[250:4200], Y[3500:5300], X[2300:7550]` or as start and size `Z=250, Y=3500, X=2300, size 3950x1800x5250`; the crop name. See "The crop box" below |
+| 18 to 25 | the labels that come with the data (leave empty when there are none): where they are, what they segment (cell, neuron, nucleus, mitochondria, ...), instance or semantic, where they come from (manual, automatic prediction, proofread, public), how much they cover, the class table of a semantic label, who made them and when |
+| 26 to 27 | license (CC BY 4.0 for Janelia data, another public license, or not stated at the source) and publication |
+| 28 to 29 | who to hand it to, and notes |
 
 ### The crop box
 

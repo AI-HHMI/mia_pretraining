@@ -157,39 +157,27 @@ body:
   id: bbox2
   attributes:
     label: Step 15. Crop box 2 (voxels of the source, optional)
-- type: input
-  id: bbox3
-  attributes:
-    label: Step 16. Crop box 3 (voxels of the source, optional)
-- type: input
-  id: bbox4
-  attributes:
-    label: Step 17. Crop box 4 (voxels of the source, optional)
-- type: input
-  id: bbox5
-  attributes:
-    label: Step 18. Crop box 5 (voxels of the source, optional)
 - type: textarea
   id: bbox_more
   attributes:
-    label: Step 19. More crop boxes (optional)
-    description: Boxes 6 to 10, one box per line, in either format.
+    label: Step 16. More crop boxes (Crop box 3 and up, optional)
+    description: Boxes 3 to 10, one box per line, in either format.
 - type: input
   id: cropname
   attributes:
-    label: Step 20. Crop name (optional)
+    label: Step 17. Crop name (optional)
     description: '`crop-001` for the first crop of a dataset; add a short word after it only when it means something (`crop-002_nuc`).'
     placeholder: crop-001
 - type: textarea
   id: labels
   attributes:
-    label: Step 21. Label paths (optional, one per line)
-    description: Where each label is (cluster path or Fileglancer link), and its name in its container. Leave Steps 21 to 28 empty when no labels come with the volume.
+    label: Step 18. Label paths (optional, one per line)
+    description: Where each label is (cluster path or Fileglancer link), and its name in its container. Leave Steps 18 to 25 empty when no labels come with the volume.
     placeholder: /groups/miaai/miaai/Annotation_JJ/mito001/mito001.zarr/mito001_combined_AIPv2
 - type: dropdown
   id: label_class
   attributes:
-    label: Step 22. What the labels segment (optional)
+    label: Step 19. What the labels segment (optional)
     options:
     - cell
     - neuron
@@ -202,12 +190,12 @@ body:
     - blood_vessel
     - spine
     - active_zone
-    - Several organelle classes in one label (CellMap style, list them in Step 26)
+    - Several organelle classes in one label (CellMap style, list them in Step 23)
     - Other (say which in the notes)
 - type: dropdown
   id: segmentation_type
   attributes:
-    label: Step 23. Segmentation type (optional)
+    label: Step 20. Segmentation type (optional)
     description: Instance means every object has its own id. Semantic means each voxel holds a class. Point means point annotations.
     options:
     - instance (every object its own id)
@@ -216,7 +204,7 @@ body:
 - type: dropdown
   id: provenance
   attributes:
-    label: Step 24. Where the labels come from (optional)
+    label: Step 21. Where the labels come from (optional)
     options:
     - Manual annotation (ground truth)
     - Automatic prediction (not proofread)
@@ -225,7 +213,7 @@ body:
 - type: dropdown
   id: coverage
   attributes:
-    label: Step 25. How much of the crop the labels cover (optional)
+    label: Step 22. How much of the crop the labels cover (optional)
     options:
     - Dense (every object in the crop is labelled)
     - Sparse (only a selected part is labelled)
@@ -234,7 +222,7 @@ body:
 - type: textarea
   id: classes
   attributes:
-    label: Step 26. Class table for semantic labels (optional)
+    label: Step 23. Class table for semantic labels (optional)
     description: One line per value, `value = class name`. Leave empty for an instance label.
     placeholder: |-
       50 = mitochondria
@@ -242,39 +230,39 @@ body:
 - type: input
   id: made_by
   attributes:
-    label: Step 27. Who made the labels, with what, and when (optional)
+    label: Step 24. Who made the labels, with what, and when (optional)
     description: Annotators' full names, the tool, and the date of the final version.
     placeholder: Alannah Post and Marley Bryant, Amira, 2026-08-24
 - type: textarea
   id: label_notes
   attributes:
-    label: Step 28. Anything else about the labels (optional)
+    label: Step 25. Anything else about the labels (optional)
     description: Known problems, merged or split ids, which version is the final one, model name for a prediction.
 - type: dropdown
   id: license
   attributes:
-    label: Step 29. License
+    label: Step 26. License
     options:
     - CC BY 4.0, Janelia data (see the open science page)
-    - Another public license (give it in Step 30)
+    - Another public license (give it in Step 27)
     - Not stated at the source
   validations:
     required: true
 - type: textarea
   id: publication
   attributes:
-    label: Step 30. Publication and license details (optional)
+    label: Step 27. Publication and license details (optional)
     description: The DOI or paper, and the license text or link when it is not CC BY 4.0.
     placeholder: Zheng et al. 2025, doi:10.1101/2025.07.09.663979. MIT, from the HuggingFace card.
 - type: input
   id: people
   attributes:
-    label: Step 31. Hand to and who asked (GitHub users)
+    label: Step 28. Hand to and who asked (GitHub users)
     placeholder: '@CarlaRodriguez96 @walshjj'
   validations:
     required: true
 - type: textarea
   id: notes
   attributes:
-    label: Step 32. Notes (optional)
+    label: Step 29. Notes (optional)
     description: Anything about the data (how it was made, tiling artifacts, why it replaces an earlier one).
