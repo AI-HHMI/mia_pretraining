@@ -30,10 +30,14 @@ What each step asks for:
 | 1 to 2 | what is new (a new dataset, a new crop of an existing one, or a volume that replaces an earlier dataset) and the dataset issue it belongs to or replaces |
 | 3 to 8 | the dataset: project, organism, modality, name, source type (internal or external) and source lab. They match the board fields of the same names |
 | 9 to 12 | the source: cluster path, format and size, voxel size (only if the file does not say it), expansion factor and who confirmed it |
-| 13 to 16 | the crop, one field for each part: a Neuroglancer link to the box (optional), the start corner in voxels of the source (`Z=250, Y=3500, X=2300`; leave empty for the whole volume), the size (`3950x1800x5250`, or write `whole volume`), and the crop name |
-| 17 to 24 | the labels that come with the data (leave empty when there are none): where they are, what they segment (cell, neuron, nucleus, mitochondria, ...), instance or semantic, where they come from (manual, automatic prediction, proofread, public), how much they cover, the class table of a semantic label, who made them and when |
-| 25 to 26 | license (CC BY 4.0 for Janelia data, another public license, or not stated at the source) and publication |
-| 27 to 28 | who to hand it to, and notes |
+| 13 to 20 | the crop (all optional): a Neuroglancer link to the box; **Crop box 1** to **Crop box 5** and **More crop boxes** (one per line), each as start to end `Z[250:4200], Y[3500:5300], X[2300:7550]` or as start and size `Z=250, Y=3500, X=2300, size 3950x1800x5250`; the crop name. See "The crop box" below |
+| 21 to 28 | the labels that come with the data (leave empty when there are none): where they are, what they segment (cell, neuron, nucleus, mitochondria, ...), instance or semantic, where they come from (manual, automatic prediction, proofread, public), how much they cover, the class table of a semantic label, who made them and when |
+| 29 to 30 | license (CC BY 4.0 for Janelia data, another public license, or not stated at the source) and publication |
+| 31 to 32 | who to hand it to, and notes |
+
+### The crop box
+
+A volume that fits (below about 500 GB of raw data) is ingested whole: leave the crop boxes empty or write `whole volume`. A bigger one needs a box. If you know it, give it in **Crop box 1** (the box can hold the label crops with a margin around them). If you do not, leave the boxes empty: we propose the box from the labels, with a margin around all of them and outside non-tissue, show it to you in Neuroglancer, and cut only after you sign off. Several boxes mean several crops of the dataset.
 
 ## 2. What happens next
 
