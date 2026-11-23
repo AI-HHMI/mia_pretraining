@@ -30,10 +30,10 @@ What each step asks for:
 | 1 to 2 | what is new (a new dataset, a new crop of an existing one, or a volume that replaces an earlier dataset) and the dataset issue it belongs to or replaces |
 | 3 to 8 | the dataset: project, organism, modality, name, source type (internal or external) and source lab. They match the board fields of the same names |
 | 9 to 12 | the source: cluster path, format and size, voxel size (only if the file does not say it), expansion factor and who confirmed it |
-| 13 to 14 | the crop: a Neuroglancer link to the box, or `Z[a:b], Y[a:b], X[a:b]` with the grid; the crop name |
-| 15 to 22 | the labels that come with the data (leave empty when there are none): where they are, what they segment (cell, neuron, nucleus, mitochondria, ...), instance or semantic, where they come from (manual, automatic prediction, proofread, public), how much they cover, the class table of a semantic label, who made them and when |
-| 23 to 24 | license (CC BY 4.0 for Janelia data, another public license, or not stated at the source) and publication |
-| 25 to 26 | who to hand it to, and notes |
+| 13 to 16 | the crop, one field for each part: a Neuroglancer link to the box (optional), the start corner in voxels of the source (`Z=250, Y=3500, X=2300`; leave empty for the whole volume), the size (`3950x1800x5250`, or write `whole volume`), and the crop name |
+| 17 to 24 | the labels that come with the data (leave empty when there are none): where they are, what they segment (cell, neuron, nucleus, mitochondria, ...), instance or semantic, where they come from (manual, automatic prediction, proofread, public), how much they cover, the class table of a semantic label, who made them and when |
+| 25 to 26 | license (CC BY 4.0 for Janelia data, another public license, or not stated at the source) and publication |
+| 27 to 28 | who to hand it to, and notes |
 
 ## 2. What happens next
 
